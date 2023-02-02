@@ -1,0 +1,28 @@
+<script src="faz-um-pix.min.js"></script>
+<script src="faz-um-pix.min.js.map"></script>
+
+<h1 onclick="test()">Olá! Clique aqui para gerar um QR Code e um código PIX para fazer uma transação via PIX.</h1>
+<img id="qrCodeImg" name="qrCodeImg"/>
+<div id="pixCode" name="pixCode"></div>
+
+<script>
+    function test(){
+        const qrCode = _pix.Pix("e0d5082a-9df2-420e-b386-483899f5132f", "", "SP", "192.01", "Pedido #1", true);
+        
+        qrCode.then((result) => {
+            console.log("Lesgo: " + result);
+            document.getElementById('qrCodeImg').src = result;
+            }).catch((error) => {
+                console.error(error);
+        });
+        
+        var pixCodeSource = _pix.Pix("e0d5082a-9df2-420e-b386-483899f5132f", "", "SP", "445.76", "Pedido #1");
+
+        pixCodeSource.then((result) => {
+            console.log("Lesgo 2: " + result);
+            document.getElementById('pixCode').textContent = result;
+            }).catch((error) => {
+                console.error(error);
+        });
+    }
+</script>
